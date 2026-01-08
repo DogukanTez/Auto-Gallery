@@ -10,8 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ErrorMessage {
-    private String ofStatic;
     private MessageType messageType;
+    private String ofStatic;
+
 
     public String prepareErrormessage(){
         StringBuilder stringBuilder = new StringBuilder();

@@ -1,6 +1,5 @@
 package com.dogukantez.handler;
 
-import com.dogukantez.exception.ErrorMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

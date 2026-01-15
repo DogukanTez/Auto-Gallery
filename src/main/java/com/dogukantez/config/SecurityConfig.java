@@ -1,5 +1,6 @@
 package com.dogukantez.config;
 
+import com.dogukantez.handler.AuthEntryPoint;
 import com.dogukantez.jwt.JWTAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,16 +24,20 @@ public class SecurityConfig {
     private AuthenticationProvider authenticationProvider;
     @Autowired
     private JWTAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private AuthEntryPoint authEntryPoint;
 
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthEntryPoint authEntryPoint) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(REGISTER, AUTHENTICATE, REFRESH_TOKEN).permitAll()
                                 .anyRequest()
                                 .authenticated())
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

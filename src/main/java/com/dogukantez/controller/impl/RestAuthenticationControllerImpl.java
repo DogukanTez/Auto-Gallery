@@ -4,6 +4,7 @@ import com.dogukantez.controller.IRestAuthenticationController;
 import com.dogukantez.controller.RestBaseController;
 import com.dogukantez.controller.RootEntity;
 import com.dogukantez.dto.AuthRequest;
+import com.dogukantez.dto.AuthResponse;
 import com.dogukantez.dto.DtoUser;
 import com.dogukantez.service.IAuthenticationService;
 import jakarta.validation.Valid;
@@ -21,5 +22,11 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
     @Override
     public RootEntity<DtoUser> register(@Valid @RequestBody AuthRequest input) {
         return ok(authenticationService.register(input));
+    }
+
+    @PostMapping("/authenticate")
+    @Override
+    public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest input) {
+        return ok(authenticationService.authenticate(input));
     }
 }

@@ -9,6 +9,7 @@ public enum MessageType {
     NO_RECORD_EXIST("1004","No record found."),
     TOKEN_IS_EXPIRED("1005","Token is expired"),
     USERNAME_NOT_FOUND("1006","User Not Found."),
+    USERNAME_OR_PASSWORD_INCORRECT("1007","Invalid credentials."),
     GENERAL_EXCEPTION("9999","Some error occurred.");
 
     private final String code;

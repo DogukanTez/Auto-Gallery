@@ -3,6 +3,7 @@ package com.dogukantez.service.impl;
 import com.dogukantez.dto.AuthRequest;
 import com.dogukantez.dto.AuthResponse;
 import com.dogukantez.dto.DtoUser;
+import com.dogukantez.dto.RefreshTokenRequest;
 import com.dogukantez.entities.RefreshToken;
 import com.dogukantez.entities.User;
 import com.dogukantez.exception.BaseException;
@@ -87,6 +88,30 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         } catch (Exception e) {
             throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD_INCORRECT,e.getMessage()));
         }
+
+    }
+
+    public boolean isValidRefreshToken(Date expiredate){
+        return new Date().before(expiredate);
+    }
+
+    @Override
+    public AuthResponse refreshToken(RefreshTokenRequest input) {
+        Optional<RefreshToken> optRefreshToken = refreshTokenRepository.findByRefreshToken(input.getRefreshToken());
+
+        if(optRefreshToken.isEmpty()){
+            throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND,input.getRefreshToken()));
+        }
+
+        if(!isValidRefreshToken(optRefreshToken.get().getExpireDate())){
+            throw new BaseException(new ErrorMessage(MessageType.REFRESH_TOKEN_IS_EXPIRED,input.getRefreshToken()));
+        }
+
+        User user = optRefreshToken.get().getUser();
+        String accessToken = jwtService.generateToken(user);
+        RefreshToken savedRefreshToken = refreshTokenRepository.save(createRefreshToken(user));
+
+        return new AuthResponse(accessToken,savedRefreshToken.getRefreshToken());
 
     }
 }

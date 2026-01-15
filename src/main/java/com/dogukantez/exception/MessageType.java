@@ -10,6 +10,8 @@ public enum MessageType {
     TOKEN_IS_EXPIRED("1005","Token is expired"),
     USERNAME_NOT_FOUND("1006","User Not Found."),
     USERNAME_OR_PASSWORD_INCORRECT("1007","Invalid credentials."),
+    REFRESH_TOKEN_NOT_FOUND("1008", "Refresh token not found."),
+    REFRESH_TOKEN_IS_EXPIRED("1009","Refresh token is expired"),
     GENERAL_EXCEPTION("9999","Some error occurred.");
 
     private final String code;

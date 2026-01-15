@@ -6,6 +6,7 @@ import com.dogukantez.controller.RootEntity;
 import com.dogukantez.dto.AuthRequest;
 import com.dogukantez.dto.AuthResponse;
 import com.dogukantez.dto.DtoUser;
+import com.dogukantez.dto.RefreshTokenRequest;
 import com.dogukantez.service.IAuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,11 @@ public class RestAuthenticationControllerImpl extends RestBaseController impleme
     @Override
     public RootEntity<AuthResponse> authenticate(@Valid @RequestBody AuthRequest input) {
         return ok(authenticationService.authenticate(input));
+    }
+
+    @PostMapping("/refreshToken")
+    @Override
+    public RootEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest input) {
+        return ok(authenticationService.refreshToken(input));
     }
 }

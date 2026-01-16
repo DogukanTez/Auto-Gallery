@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class DtoAccountIU {
-    @NotEmpty
+    @NotNull
     private String accountNo;
-    @NotEmpty
+    @NotNull
     private String iban;
-    @NotEmpty
+    @NotNull
     private BigDecimal amount;
-    @NotEmpty
+    @NotNull
     private CurrencyType currencyType;
 }

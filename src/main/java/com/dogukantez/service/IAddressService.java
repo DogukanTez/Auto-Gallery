@@ -1,5 +1,8 @@
 package com.dogukantez.service;
 
-public interface IAddressService {
+import com.dogukantez.dto.DtoAddress;
+import com.dogukantez.dto.DtoAddressIU;
 
+public interface IAddressService {
+public DtoAddress saveAddress(DtoAddressIU dtoAddressIU);
 }

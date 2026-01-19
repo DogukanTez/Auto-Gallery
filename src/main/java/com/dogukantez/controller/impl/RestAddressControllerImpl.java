@@ -8,20 +8,26 @@ import com.dogukantez.dto.DtoAddressIU;
 import com.dogukantez.service.IAddressService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rest/api/address")
 public class RestAddressControllerImpl extends RestBaseController implements IRestAddressController {
-    @Autowired
-    private IAddressService addressService;
+    private final IAddressService addressService;
 
-    @PostMapping("save")
+    public RestAddressControllerImpl(IAddressService addressService) {
+        this.addressService = addressService;
+    }
+
+    @PostMapping("/save")
     @Override
     public RootEntity<DtoAddress> saveAddress(@Valid @RequestBody DtoAddressIU dtoAddressIU) {
             return ok(addressService.saveAddress(dtoAddressIU));
+    }
+
+    @PutMapping("/{id}")
+    @Override
+    public RootEntity<DtoAddress> updateAddress(@PathVariable Long id,@Valid @RequestBody DtoAddressIU dtoAddressIU) {
+        return ok(addressService.updateAddress(id, dtoAddressIU));
     }
 }

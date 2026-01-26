@@ -12,6 +12,7 @@ public enum MessageType {
     USERNAME_OR_PASSWORD_INCORRECT("1007","Invalid credentials."),
     REFRESH_TOKEN_NOT_FOUND("1008", "Refresh token not found."),
     REFRESH_TOKEN_IS_EXPIRED("1009","Refresh token is expired"),
+    CURRENCY_RATES_IS_ERR_OCCURRED("1010","Currency service couldn't operated."),
     GENERAL_EXCEPTION("9999","Some error occurred.");
 
     private final String code;

@@ -22,7 +22,7 @@ public class RestSoldCarControllerImpl extends RestBaseController implements IRe
         this.soldCarService= soldCarService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/save")
     @Override
     public RootEntity<DtoSoldCar> buyCar(@Valid @RequestBody DtoSoldCarIU dtoSoldCarIU) {
         return ok(soldCarService.buyCar(dtoSoldCarIU));

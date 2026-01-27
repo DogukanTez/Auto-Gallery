@@ -13,6 +13,8 @@ public enum MessageType {
     REFRESH_TOKEN_NOT_FOUND("1008", "Refresh token not found."),
     REFRESH_TOKEN_IS_EXPIRED("1009","Refresh token is expired"),
     CURRENCY_RATES_IS_ERR_OCCURRED("1010","Currency service couldn't operated."),
+    CUSTOMER_AMOUNT_IS_NOT_ENOUGH("1011","Customer amount is not enough for buy operation."),
+    CAR_STATUS_ALREADY_SOLD("1012","This car is already sold."),
     GENERAL_EXCEPTION("9999","Some error occurred.");
 
     private final String code;

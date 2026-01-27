@@ -23,13 +23,15 @@ public class CurrencyRatesServiceImpl implements ICurrencyRatesService {
         String endpoint = rootURL+"series="+series+"&startDate="+startDate+"&endDate="+endDate+"&type="+type;
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("key","UapgDoDrnZ");
-        HttpEntity<?> httpEntity= new HttpEntity<>(httpHeaders);
+        httpHeaders.set("key","XXXXXX");
+        //httpHeaders.set("Content-Type", "application/json");
+        HttpEntity<?> httpEntity= new HttpEntity<>(null,httpHeaders);
         RestTemplate restTemplate = new RestTemplate();
 
         try {
             ResponseEntity<CurrencyRatesResponse> response = restTemplate.exchange(endpoint, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<CurrencyRatesResponse>() {
             });
+
 
             if(response.getStatusCode().is2xxSuccessful()){
                 return response.getBody();
